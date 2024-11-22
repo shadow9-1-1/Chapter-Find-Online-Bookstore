@@ -1,7 +1,10 @@
+using Chapter_Find_Online_Bookstore.Model;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<dbclass>();
 
 var app = builder.Build();
 
