@@ -1,0 +1,101 @@
+﻿@page
+@model Chapter_Find_Online_Bookstore.Pages.BooksModel
+@{
+    ViewData["Title"] = "Books";
+}
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-center py-5">
+            <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                <h1 class="display-3 text-white animated slideInDown">All Books</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="Index">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Books</li>
+                    </ol>
+                </nav>
+                <div class="position-relative w-75 mx-auto animated slideInDown">
+                    <form method="Post">
+                        <input asp-for="@Model.Scearsh" class=" form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Search for a book or author">
+                        <button asp-page-handler="submit" type="submit" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Books Start -->
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Books</h6>
+            <h1 class="mb-5">All Books</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+            @for (int i = 0; i < Model.Table.Rows.Count; i++)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="package-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/Books (1).jpg" alt="">
+                        </div>
+                        <div class="d-flex border-bottom">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-pen text-primary me-2"></i>@Model.Table.Rows[i][2]</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-info text-primary me-2"></i>@Model.Table.Rows[i][3]</small>
+
+                        </div>
+                        <div class="text-center p-4">
+                            <h3 class="mb-2">@Model.Table.Rows[i][1]</h3>
+                            @if (Convert.ToInt32(Model.Table.Rows[i][5]) == 1)
+                            {
+
+                                <h4 class="mb-1">
+
+                                    <span style="color: green;">@Model.Table.Rows[i][6] L.E</span>
+                                </h4>
+                                <h6 class="mb-1">
+                                    <span style="color: red; text-decoration: line-through;">@Model.Table.Rows[i][4] L.E</span>
+
+                                </h6>
+
+                            }
+                            else
+                            {
+                                <h4 class="mb-1">@Model.Table.Rows[i][4] L.E</h4>
+                            }
+
+
+                            <p>@Model.Table.Rows[i][8]</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <form method="post">
+                                    <input asp-for="@Model.bookid" value="@Model.Table.Rows[i][0]" type="hidden">
+                                    <input asp-for="@Model.Aid" value="@Model.Table.Rows[i][13]" type="hidden">
+                                    <input asp-for="@Model.categoryid" value="@Model.Table.Rows[i][14]" type="hidden">
+
+                                    <button asp-page-handler="book" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</button>
+
+                                </form>
+                                <button class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;" href="">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+
+</div>
