@@ -11,6 +11,8 @@ namespace Chapter_Find_Online_Bookstore.Pages
         public string Scearsh { get; set; }
         [BindProperty]
         public string Tid { get; set; }
+        [BindProperty]
+        public string TypeName { get; set; }
         private dbclass t1;
         public DataTable Table { get; set; }
         public DataTable Table1 { get; set; }
@@ -37,7 +39,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
         }
         public IActionResult OnPostTypes()
         {
-            return RedirectToPage("/typeinfo", new { Tid = Tid });
+            return RedirectToPage("/typeinfo", new { Tid = Tid, TypeName= TypeName });
         }
     }
 }

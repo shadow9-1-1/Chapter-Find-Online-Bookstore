@@ -55,6 +55,8 @@
 
                             <form method="post">
                                 <input asp-for="@Model.Tid" value="@Model.Table4.Rows[i][0]" type="hidden">
+                                <input asp-for="@Model.TypeName" value="@Model.Table4.Rows[i][1]" type="hidden">
+
 
                                 <button asp-page-handler="types" class="btn btn-primary">Show More Information</button>
 
