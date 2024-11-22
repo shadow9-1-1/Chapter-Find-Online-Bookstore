@@ -297,6 +297,37 @@ namespace Chapter_Find_Online_Bookstore.Model
             return dt;
         }
 
+        public DataTable GetAuthors()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+        SELECT 
+            a.AuthorID, 
+            a.Name, 
+            a.Description, 
+            a.img AS AuthorImage, 
+            c.CategoryName AS TopCategoryName
+        FROM Authors a
+        LEFT JOIN Categories c ON a.TopCategoryID = c.CategoryID";
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
 
     }
 }

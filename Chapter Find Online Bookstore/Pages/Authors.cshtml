@@ -1,0 +1,74 @@
+﻿@page
+@model Chapter_Find_Online_Bookstore.Pages.AuthorsModel
+@{
+    ViewData["Title"] = "Authors";
+}
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-center py-5">
+            <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                <h1 class="display-3 text-white animated slideInDown">All Authors</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="Index">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Authors</li>
+                    </ol>
+                </nav>
+                <div class="position-relative w-75 mx-auto animated slideInDown">
+                    <form method="Post">
+                        <input asp-for="@Model.Scearsh" class=" form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Search for a book or author">
+                        <button asp-page-handler="submit" type="submit" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Team Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Meet the Authors</h6>
+            <h1 class="mb-5">Discover the Mind Behind the Words</h1>
+        </div>
+        <div class="row g-4">
+            @for (int i = 0; i < Model.Table3.Rows.Count; i++)
+            {
+
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+
+                    <div class="team-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/ahmed abdelkader.jpg" alt="">
+                        </div>
+
+                        <div class="text-center p-4">
+                            <h5 class="mb-1">@Model.Table3.Rows[i][1]</h5>
+                            <P class="mb-0">Popular in @Model.Table3.Rows[i][4]</P>
+
+                            <form method="post">
+                                <input asp-for="@Model.AAid" value="@Model.Table3.Rows[i][0]" type="hidden">
+
+                                <button asp-page-handler="author" class="btn btn-primary">Show More Information</button>
+
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+<!-- Team End -->
