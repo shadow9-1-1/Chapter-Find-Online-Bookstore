@@ -1,0 +1,69 @@
+﻿@page
+@model Chapter_Find_Online_Bookstore.Pages.loginModel
+@{
+
+    ViewData["Title"] = "Login";
+}
+
+
+
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- Spinner End -->
+
+
+<br />
+<br />
+<br />
+<br />
+@if (!string.IsNullOrEmpty(Model.UserError))
+{
+    <div class="alert alert-danger float-alert" role="alert">
+        @Model.UserError
+        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';"></button>
+    </div>
+}
+
+<style>
+    .float-alert {
+        position: fixed; /* Position fixed to the viewport */
+        top: 80px; /* Space from the top */
+        right: 20px; /* Space from the right */
+        z-index: 1050; /* Ensures it stays on top of other elements */
+        border-radius: 10px; /* Rounded corners */
+        opacity: 0.9; /* Slightly transparent */
+        transition: opacity 0.5s ease; /* Smooth transition for fading out */
+    }
+
+        .float-alert .btn-close {
+            margin-left: 10px; /* Space between message and button */
+        }
+</style>
+
+
+<h2 class="text-center mb-4">Login</h2>
+
+<form method="post" asp-action="submit" class="p-4 shadow rounded bg-light">
+    <div class="form-group mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" asp-for="@Model.Username" required />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" asp-for="@Model.Password" required />
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+</form>
+
+<div class="text-center mt-3">
+    <p>Don't have an account? <a href="/signup">Register here</a></p>
+</div>
+

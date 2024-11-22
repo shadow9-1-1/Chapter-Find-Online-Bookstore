@@ -1,10 +1,41 @@
-﻿using System.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Chapter_Find_Online_Bookstore.Model
 {
     public class dbclass
     {
+        [BindProperty]
+        public string AUsername { get; set; }
+        public string Ausername1(string Ausername)
+        {
+            AUsername = Ausername;
+            return AUsername;
+        }
+        [BindProperty]
+        public string Username { get; set; }
+        public string username1(string username)
+        {
+            Username = username;
+            return Username;
+        }
+
+        public string UserID { get; set; }
+        public string userIDinput(string id)
+        {
+            UserID = id;
+            return UserID;
+        }
+
+
+        public string OUsername { get; set; }
+        public string Ousername1(string username)
+        {
+            OUsername = username;
+            return OUsername;
+        }
+
         public SqlConnection con { get; set; }
         public dbclass()
         {
