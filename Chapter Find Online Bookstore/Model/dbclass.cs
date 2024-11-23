@@ -41,7 +41,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         {
 
 
-            string SQLcon = "Data Source=MohamedWael;Initial Catalog=ChapterFind;Integrated Security=True;";
+            string SQLcon = "Data Source=Salakawy;Initial Catalog=ChapterFind;Integrated Security=True;";
 
             con = new SqlConnection(SQLcon);
         }
@@ -327,7 +327,95 @@ namespace Chapter_Find_Online_Bookstore.Model
             return dt;
         }
 
+        public DataTable GetBookByID(string bookID)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+        SELECT 
+            b.BookID, 
+            b.Title, 
+            a.Name, 
+            c.CategoryName, 
+            b.Price, 
+            b.IsDiscount, 
+            b.Discount, 
+            b.InStock, 
+            b.SDescription, 
+            b.Description, 
+            b.ReleaseDate, 
+            b.NuOfPage, 
+            b.img,
+            a.AuthorID,
+            c.CategoryID
+        FROM Books b
+        JOIN Authors a ON b.AuthorID = a.AuthorID
+        JOIN Categories c ON b.CategoryID = c.CategoryID
+        WHERE b.BookID = @BookID";
 
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@BookID", bookID);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
 
+            return dt;
+        }
+
+        public DataTable Similarbooks(string authorID, string categoryID)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+    SELECT 
+        b.BookID, 
+        b.Title, 
+        a.Name, 
+        c.CategoryName, 
+        b.Price, 
+        b.IsDiscount, 
+        b.Discount, 
+        b.InStock, 
+        b.SDescription, 
+        b.Description, 
+        b.ReleaseDate, 
+        b.NuOfPage, 
+        b.img,
+        a.AuthorID,
+        c.CategoryID    
+    FROM Books b
+    JOIN Authors a ON b.AuthorID = a.AuthorID
+    JOIN Categories c ON b.CategoryID = c.CategoryID
+    WHERE (a.AuthorID = @AuthorID
+    OR c.CategoryID = @CategoryID) AND b.Collection = 0";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        
     }
 }
