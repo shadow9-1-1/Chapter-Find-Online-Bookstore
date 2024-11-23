@@ -417,5 +417,128 @@ namespace Chapter_Find_Online_Bookstore.Model
             return dt;
         }
         
+
+        public DataTable GetAuthorByID(string authorID)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+    SELECT 
+        a.AuthorID, 
+        a.Name, 
+        a.Description, 
+        a.img, 
+        c.CategoryName AS TopCategory
+    FROM Authors a
+    LEFT JOIN Categories c ON a.TopCategoryID = c.CategoryID
+    WHERE a.AuthorID = @AuthorID";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle SQL exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetBooksByAuthorID(string authorID)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+    SELECT 
+        b.BookID, 
+        b.Title, 
+        a.Name, 
+        c.CategoryName, 
+        b.Price, 
+        b.IsDiscount, 
+        b.Discount, 
+        b.InStock, 
+        b.SDescription, 
+        b.Description, 
+        b.ReleaseDate, 
+        b.NuOfPage, 
+        b.img,
+        a.AuthorID,
+        c.CategoryID 
+    FROM Books b
+    JOIN Authors a ON b.AuthorID = a.AuthorID
+    JOIN Categories c ON b.CategoryID = c.CategoryID
+    WHERE a.AuthorID = @AuthorID AND b.Collection = 0";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+        public DataTable GetCollectionByAuthorID(string authorID)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+    SELECT 
+        b.BookID, 
+        b.Title, 
+        a.Name, 
+        c.CategoryName, 
+        b.Price, 
+        b.IsDiscount, 
+        b.Discount, 
+        b.InStock, 
+        b.SDescription, 
+        b.Description, 
+        b.ReleaseDate, 
+        b.NuOfPage, 
+        b.img,
+        a.AuthorID,
+        c.CategoryID 
+    FROM Books b
+    JOIN Authors a ON b.AuthorID = a.AuthorID
+    JOIN Categories c ON b.CategoryID = c.CategoryID
+    WHERE a.AuthorID = @AuthorID AND b.Collection = 1";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
     }
 }
