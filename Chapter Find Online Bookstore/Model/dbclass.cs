@@ -41,7 +41,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         {
 
 
-            string SQLcon = "Data Source=MohamedWael;Initial Catalog=ChapterFind;Integrated Security=True;";
+            string SQLcon = "Data Source=AHMED;Initial Catalog=ChapterFind;Integrated Security=True;";
 
             con = new SqlConnection(SQLcon);
         }

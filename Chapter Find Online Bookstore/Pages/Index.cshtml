@@ -3,8 +3,258 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Spinner Start -->
+<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>
+<!-- Spinner End -->
+
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-center py-5">
+            <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Explore Our Collection of Books</h1>
+                <p class="fs-4 text-white mb-4 animated slideInDown">Discover a wide range of books from various genres by renowned authors</p>
+                <div class="position-relative w-75 mx-auto animated slideInDown">
+                    <form method="Post">
+                        <input asp-for="@Model.Scearsh" class=" form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Search for a book or author">
+                        <button asp-page-handler="submit" type="submit" class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2" style="margin-top: 7px;">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="~/img/about img.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
+                <h1 class="mb-4">Welcome to <span class="text-primary">ChapterFind</span></h1>
+                <p class="mb-4">
+                    Designed to be an online haven for book enthusiasts, Chapter Find is a bookstore platform crafted to make book discovery and purchasing simple, enjoyable, and user-friendly.
+                </p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-layer-group text-primary me-2"></i>Different types of books</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-feather text-primary me-2"></i>Renowned Authors</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-star text-primary me-2"></i>Quality Assurance</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-globe text-primary me-2"></i>Global Distribution</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>Custom Publishing Solutions</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-palette text-primary me-2"></i>Engaging Design</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-leaf text-primary me-2"></i>Sustainability Commitment</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-book-open text-primary me-2"></i>Reader-Centric Approach</p>
+                    </div>
+                </div>
+
+                @* <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a> *@
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<!-- Destination Start -->
+<div class="container-xxl py-5 destination">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Types</h6>
+            <h1 class="mb-5">Types of books</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-7 col-md-6">
+                <div class="row g-3">
+                    <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
+                        <a class="position-relative d-block overflow-hidden" href="">
+                            <img class="img-fluid" src="img/@Model.Table4.Rows[0][2]" alt="">
+                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[0][1]</div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
+                        <a class="position-relative d-block overflow-hidden" href="">
+                            <img class="img-fluid" src="img/@Model.Table4.Rows[1][2]" alt="">
+                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[1][1]</div>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
+                        <a class="position-relative d-block overflow-hidden" href="">
+                            <img class="img-fluid" src="img/@Model.Table4.Rows[2][2]" alt="">
+                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[2][1]</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
+                <a class="position-relative d-block h-100 overflow-hidden" href="">
+                    <img class="img-fluid position-absolute w-100 h-100" src="img/@Model.Table4.Rows[3][2]" alt="" style="object-fit: cover;">
+                    <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[3][1]</div>
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.3s">
+            <a class="btn btn-primary px-4 py-2" href="Types">Show More Types</a>
+        </div>
+    </div>
+</div>
+<!-- Destination Start -->
+<!-- Books Start -->
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Books</h6>
+            <h1 class="mb-5">Some of our Books</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="package-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/@Model.Table.Rows[i][12]" alt="">
+                        </div>
+                        <div class="d-flex border-bottom">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-pen text-primary me-2"></i>@Model.Table.Rows[i][2]</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-info text-primary me-2"></i>@Model.Table.Rows[i][3]</small>
+
+                        </div>
+                        <div class="text-center p-4">
+                            <h3 class="mb-2">@Model.Table.Rows[i][1]</h3>
+                            @if (Convert.ToInt32(Model.Table.Rows[i][5]) == 1)
+                            {
+
+                                <h4 class="mb-1">
+
+                                    <span style="color: green;">@Model.Table.Rows[i][6] L.E</span>
+                                </h4>
+                                <h6 class="mb-1">
+                                    <span style="color: red; text-decoration: line-through;">@Model.Table.Rows[i][4] L.E</span>
+
+                                </h6>
+
+                            }
+                            else
+                            {
+                                <h5 class="mb-1">@Model.Table.Rows[i][4] L.E</h5>
+                            }
+
+
+                            <p>@Model.Table.Rows[i][8]</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <form method="post">
+                                    <input asp-for="@Model.bookid" value="@Model.Table.Rows[i][0]" type="hidden">
+                                    <input asp-for="@Model.Aid" value="@Model.Table.Rows[i][13]" type="hidden">
+                                    <input asp-for="@Model.categoryid" value="@Model.Table.Rows[i][14]" type="hidden">
+
+                                    <button asp-page-handler="book" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</button>
+
+                                </form>
+                                <button class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;" href="">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+
+        </div>
+        @* create a "show more" button to href to books page*@
+        <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.3s">
+            <a class="btn btn-primary px-4 py-2" href="books">Show More Books</a>
+        </div>
+
+
+    </div>
+
+</div>
+
+<!-- Package Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Book collections</h6>
+            <h1 class="mb-5">Valuable book series</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="package-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/collection.jpg" alt="">
+                        </div>
+                        <div class="d-flex border-bottom">
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-pen text-primary me-2"></i>@Model.Table1.Rows[i][2]</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-book text-primary me-2"></i>@Model.Table1.Rows[i][11]</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-info text-primary me-2"></i>@Model.Table1.Rows[i][3]</small>
+                        </div>
+                        <div class="text-center p-4">
+                            <h3 class="mb-2">@Model.Table1.Rows[i][1]</h3>
+                            @if (Convert.ToInt32(Model.Table1.Rows[i][5]) == 1)
+                            {
+                                <h4 class="mb-1">
+
+                                    <span style="color: green;">@Model.Table1.Rows[i][6] L.E</span>
+                                </h4>
+                                <h6 class="mb-1">
+                                    <span style="color: red; text-decoration: line-through;">@Model.Table1.Rows[i][4] L.E</span>
+
+                                </h6>
+
+
+                            }
+                            else
+                            {
+                                <h5 class="mb-1">@Model.Table1.Rows[i][4] L.E</h5>
+                            }
+
+                            <p> @Model.Table1.Rows[i][8]</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <form method="post">
+                                    <input asp-for="@Model.collectionkid" value="@Model.Table1.Rows[i][0]" type="hidden">
+                                    <input asp-for="@Model.Aid" value="@Model.Table1.Rows[i][13]" type="hidden">
+                                    <input asp-for="@Model.ccid" value="@Model.Table1.Rows[i][14]" type="hidden">
+
+                                    <button asp-page-handler="collection" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</button>
+
+                                </form>
+                                <button class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;" href="">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.3s">
+                <a class="btn btn-primary px-4 py-2" href="allcollection">Show More Collections</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Package End -->
