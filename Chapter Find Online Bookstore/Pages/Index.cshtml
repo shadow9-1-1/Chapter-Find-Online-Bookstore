@@ -77,49 +77,50 @@
 </div>
 <!-- About End -->
 
-<!-- Destination Start -->
-<div class="container-xxl py-5 destination">
+
+<div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title bg-white text-center text-primary px-3">Types</h6>
             <h1 class="mb-5">Types of books</h1>
         </div>
-        <div class="row g-3">
-            <div class="col-lg-7 col-md-6">
-                <div class="row g-3">
-                    <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img class="img-fluid" src="img/@Model.Table4.Rows[0][2]" alt="">
-                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[0][1]</div>
-                        </a>
+        <div class="row g-4">
+            @for (int i = 0; i < Model.Table4.Rows.Count; i++)
+            {
+
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+
+                    <div class="team-item">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="img/@Model.Table4.Rows[i][2]" alt="">
+                        </div>
+
+                        <div class="text-center p-4">
+                            <h5 class="mb-1">@Model.Table4.Rows[i][1]</h5>
+
+                            <form method="post">
+                                <input asp-for="@Model.Tid" value="@Model.Table4.Rows[i][0]" type="hidden">
+                                <input asp-for="@Model.TypeName" value="@Model.Table4.Rows[i][1]" type="hidden">
+
+
+                                <button asp-page-handler="types" class="btn btn-primary">Show More Information</button>
+
+                            </form>
+                        </div>
                     </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img class="img-fluid" src="img/@Model.Table4.Rows[1][2]" alt="">
-                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[1][1]</div>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-                        <a class="position-relative d-block overflow-hidden" href="">
-                            <img class="img-fluid" src="img/@Model.Table4.Rows[2][2]" alt="">
-                            <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[2][1]</div>
-                        </a>
-                    </div>
+
+
                 </div>
-            </div>
-            <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
-                <a class="position-relative d-block h-100 overflow-hidden" href="">
-                    <img class="img-fluid position-absolute w-100 h-100" src="img/@Model.Table4.Rows[3][2]" alt="" style="object-fit: cover;">
-                    <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">@Model.Table4.Rows[3][1]</div>
-                </a>
-            </div>
+
+            }
         </div>
         <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.3s">
-            <a class="btn btn-primary px-4 py-2" href="Types">Show More Types</a>
+            <a class="btn btn-primary px-4 py-2" href="Types">Show All Types</a>
         </div>
     </div>
 </div>
-<!-- Destination Start -->
+
+
 <!-- Books Start -->
 
 <div class="container-xxl py-5">

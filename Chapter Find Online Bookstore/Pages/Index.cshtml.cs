@@ -28,6 +28,11 @@ namespace Chapter_Find_Online_Bookstore.Pages
         [BindProperty]
         public string Aid { get; set; }
 
+        [BindProperty]
+        public string Tid { get; set; }
+        [BindProperty]
+        public string TypeName { get; set; }
+
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger, dbclass t1)
@@ -59,6 +64,10 @@ namespace Chapter_Find_Online_Bookstore.Pages
         {
 
             return RedirectToPage("/colleinfo", new { collectionkid = collectionkid, ccid = ccid, Aid = Aid });
+        }
+        public IActionResult OnPostTypes()
+        {
+            return RedirectToPage("/typeinfo", new { Tid = Tid, TypeName = TypeName });
         }
     }
 }

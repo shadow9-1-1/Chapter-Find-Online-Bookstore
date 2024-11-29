@@ -95,6 +95,18 @@ CREATE TABLE Cart (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
     FOREIGN KEY (BookID) REFERENCES Books(BookID)
 );
+CREATE TABLE ShippingCost (
+    City VARCHAR(100) PRIMARY KEY,
+    Cost DECIMAL(10, 2)
+);
+
+CREATE TABLE CustomersAddress (
+    CustomerID VARCHAR(100),
+	City VARCHAR(100),
+	Address VARCHAR(100),
+	FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (City) REFERENCES ShippingCost(City)
+);
 
 
 
@@ -152,3 +164,20 @@ INSERT INTO Staff (Name, Email, PhoneNumber, Username, Password, AuthorityLevel)
 INSERT INTO Cart (CustomerID, BookID, Quantity) VALUES
 ('1', '1', 1),
 ('2', '2', 1);
+
+-- Insert Data into ShippingCost Table
+INSERT INTO ShippingCost (City, Cost) VALUES
+('Cairo', 50.00),
+('Alexandria', 70.00),
+('Giza', 40.00),
+('Sharm El-Sheikh', 100.00),
+('Luxor', 90.00),
+('Aswan', 95.00),
+('Hurghada', 80.00);
+
+-- Insert Data into CustomersAddress Table
+INSERT INTO CustomersAddress (CustomerID, City, Address) VALUES
+('1', 'Cairo', '123 Tahrir Square'),
+('1', 'Alexandria', '45 Coastal Road'),
+('2', 'Giza', '678 Pyramid Street'),
+('2', 'Sharm El-Sheikh', '12 Resort Road');
