@@ -1077,7 +1077,42 @@ namespace Chapter_Find_Online_Bookstore.Model
 
             return success;
         }
+        public bool AddAuthors(string authorID, string name, string topCategoryID, string description, string img)
+        {
+            bool success = false;
+            string query = @"
+    INSERT INTO Authors 
+        (AuthorID, Name, TopCategoryID, Description, img) 
+    VALUES 
+        (@AuthorID, @Name, @TopCategoryID, @Description, @img)";
 
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@TopCategoryID", topCategoryID);
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.Parameters.AddWithValue("@img", img);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return success;
+        }
 
     }
 }
