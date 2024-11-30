@@ -92,7 +92,7 @@ namespace Chapter_Find_Online_Bookstore.Model
     FROM Books b
     JOIN Authors a ON b.AuthorID = a.AuthorID
     JOIN Categories c ON b.CategoryID = c.CategoryID
-    WHERE c.CategoryID = @CategoryID AND b.Collection = 0";
+    WHERE c.CategoryID = @CategoryID AND b.Collection = 0 AND b.Visabilty=1";
 
             try
             {
@@ -135,7 +135,7 @@ namespace Chapter_Find_Online_Bookstore.Model
     FROM Books b
     JOIN Authors a ON b.AuthorID = a.AuthorID
     JOIN Categories c ON b.CategoryID = c.CategoryID
-    WHERE c.CategoryID = @CategoryID AND b.Collection = 1";
+    WHERE c.CategoryID = @CategoryID AND b.Collection = 1 AND b.Visabilty=1";
 
             try
             {
@@ -236,7 +236,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         FROM Books b
         JOIN Authors a ON b.AuthorID = a.AuthorID
         JOIN Categories c ON b.CategoryID = c.CategoryID
-        WHERE b.Collection = 0";
+        WHERE b.Collection = 0 AND Visabilty=1";
             try
             {
                 con.Open();
@@ -278,7 +278,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         FROM Books b
         JOIN Authors a ON b.AuthorID = a.AuthorID
         JOIN Categories c ON b.CategoryID = c.CategoryID
-        WHERE b.Collection = 1";
+        WHERE b.Collection = 1 AND Visabilty=1";
             try
             {
                 con.Open();
@@ -350,7 +350,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         FROM Books b
         JOIN Authors a ON b.AuthorID = a.AuthorID
         JOIN Categories c ON b.CategoryID = c.CategoryID
-        WHERE b.BookID = @BookID";
+        WHERE b.BookID = @BookID AND b.Collection = 0 AND b.Visabilty=1";
 
             try
             {
@@ -395,7 +395,7 @@ namespace Chapter_Find_Online_Bookstore.Model
     JOIN Authors a ON b.AuthorID = a.AuthorID
     JOIN Categories c ON b.CategoryID = c.CategoryID
     WHERE (a.AuthorID = @AuthorID
-    OR c.CategoryID = @CategoryID) AND b.Collection = 0";
+    OR c.CategoryID = @CategoryID) AND b.Collection = 0 AND b.Visabilty=1";
 
             try
             {
@@ -440,7 +440,7 @@ namespace Chapter_Find_Online_Bookstore.Model
     JOIN Authors a ON b.AuthorID = a.AuthorID
     JOIN Categories c ON b.CategoryID = c.CategoryID
     WHERE (a.AuthorID = @AuthorID
-    OR c.CategoryID = @CategoryID) AND b.Collection = 1";
+    OR c.CategoryID = @CategoryID) AND b.Collection = 1 AND b.Visabilty=1";
 
             try
             {
@@ -484,7 +484,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         FROM Books b
         JOIN Authors a ON b.AuthorID = a.AuthorID
         JOIN Categories c ON b.CategoryID = c.CategoryID
-        WHERE b.BookID = @BookID AND b.Collection = 1";
+        WHERE b.BookID = @BookID AND b.Collection = 1 AND b.Visabilty=1";
 
             try
             {
@@ -561,7 +561,7 @@ namespace Chapter_Find_Online_Bookstore.Model
     FROM Books b
     JOIN Authors a ON b.AuthorID = a.AuthorID
     JOIN Categories c ON b.CategoryID = c.CategoryID
-    WHERE a.AuthorID = @AuthorID AND b.Collection = 0";
+    WHERE a.AuthorID = @AuthorID AND b.Collection = 0 AND b.Visabilty=1";
 
             try
             {
@@ -605,7 +605,7 @@ namespace Chapter_Find_Online_Bookstore.Model
     FROM Books b
     JOIN Authors a ON b.AuthorID = a.AuthorID
     JOIN Categories c ON b.CategoryID = c.CategoryID
-    WHERE a.AuthorID = @AuthorID AND b.Collection = 1";
+    WHERE a.AuthorID = @AuthorID AND b.Collection = 1 AND b.Visabilty=1";
 
             try
             {
@@ -649,7 +649,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         JOIN Authors a ON b.AuthorID = a.AuthorID
         JOIN Categories c ON b.CategoryID = c.CategoryID
         WHERE (b.Title LIKE @searchTerm  
-        OR a.Name LIKE @searchTerm) AND b.Collection = 0";
+        OR a.Name LIKE @searchTerm) AND b.Collection = 0 AND b.Visabilty=1";
 
             try
             {
@@ -693,7 +693,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         JOIN Authors a ON b.AuthorID = a.AuthorID
         JOIN Categories c ON b.CategoryID = c.CategoryID
         WHERE (b.Title LIKE @searchTerm  
-        OR a.Name LIKE @searchTerm) AND b.Collection = 1";
+        OR a.Name LIKE @searchTerm) AND b.Collection = 1 AND b.Visabilty=1";
 
             try
             {
@@ -747,5 +747,207 @@ namespace Chapter_Find_Online_Bookstore.Model
             return dt;
         }
 
+
+
+        ////////////////////////////////////////////////////////////////////////
+        ///
+
+        public DataTable GetNewOrders()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+        SELECT * 
+        FROM Orders
+        WHERE Status = @Status";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@Status", "waiting to confirm");
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+
+        public DataTable GetBooksAdmin()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+        SELECT 
+            b.BookID, 
+            b.Title, 
+            a.Name, 
+            c.CategoryName, 
+            b.Price, 
+            b.IsDiscount, 
+            b.Discount, 
+            b.InStock, 
+            b.SDescription, 
+            b.Description, 
+            b.ReleaseDate, 
+            b.NuOfPage, 
+            b.img,
+            a.AuthorID,
+            c.CategoryID,
+            b.Visabilty
+        FROM Books b
+        JOIN Authors a ON b.AuthorID = a.AuthorID
+        JOIN Categories c ON b.CategoryID = c.CategoryID
+        WHERE b.Collection = 0";
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetCollectionAdmin()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+        SELECT 
+            b.BookID, 
+            b.Title, 
+            a.Name, 
+            c.CategoryName, 
+            b.Price, 
+            b.IsDiscount, 
+            b.Discount, 
+            b.InStock, 
+            b.SDescription, 
+            b.Description, 
+            b.ReleaseDate, 
+            b.NuOfPage, 
+            b.img,
+            a.AuthorID,
+            c.CategoryID,
+            b.Visabilty
+        FROM Books b
+        JOIN Authors a ON b.AuthorID = a.AuthorID
+        JOIN Categories c ON b.CategoryID = c.CategoryID
+        WHERE b.Collection = 1";
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+
+        public bool UpdateBookVisibility(string bookID, int visibility)
+        {
+            bool success = false;
+
+            // Define the query to update the Visibility field
+            string query = @"
+        UPDATE Books
+        SET Visabilty = @Visibility
+        WHERE BookID = @BookID and Collection = 0";
+
+            try
+            {
+                con.Open();  // Open the database connection
+
+                // Create a new SqlCommand object with the query
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                // Add parameters to the SQL command to avoid SQL injection
+                cmd.Parameters.AddWithValue("@BookID", bookID);
+                cmd.Parameters.AddWithValue("@Visibility", visibility);
+
+                // Execute the command and get the number of affected rows
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                // If rows were affected, the update was successful
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle the SQL exception (e.g., logging the error)
+            }
+            finally
+            {
+                // Close the connection whether the operation succeeded or failed
+                con.Close();
+            }
+
+            return success;  // Return whether the update was successful
+        }
+        public bool UpdateCollectionVisibility(string bookID, int visibility)
+        {
+            bool success = false;
+
+            // Define the query to update the Visibility field
+            string query = @"
+        UPDATE Books
+        SET Visabilty = @Visibility
+        WHERE BookID = @BookID and Collection = 1";
+
+            try
+            {
+                con.Open();  // Open the database connection
+
+                // Create a new SqlCommand object with the query
+                SqlCommand cmd = new SqlCommand(query, con);
+
+                // Add parameters to the SQL command to avoid SQL injection
+                cmd.Parameters.AddWithValue("@BookID", bookID);
+                cmd.Parameters.AddWithValue("@Visibility", visibility);
+
+                // Execute the command and get the number of affected rows
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                // If rows were affected, the update was successful
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle the SQL exception (e.g., logging the error)
+            }
+            finally
+            {
+                // Close the connection whether the operation succeeded or failed
+                con.Close();
+            }
+
+            return success;  // Return whether the update was successful
+        }
     }
 }
