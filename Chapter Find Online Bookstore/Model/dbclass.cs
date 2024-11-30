@@ -997,6 +997,53 @@ namespace Chapter_Find_Online_Bookstore.Model
 
             return success;
         }
+        public bool AddCollection(string bookID, string title, string authorID, string categoryID, decimal price, int isDiscount, decimal discount, int inStock, string sDescription, string description, int releaseDate, int nuOfPage, int collection, string img, int visability)
+        {
+            bool success = false;
+            string query = @"
+    INSERT INTO Books 
+        (BookID, Title, AuthorID, CategoryID, Price, IsDiscount, Discount, InStock, SDescription, Description, ReleaseDate, NuOfPage, Collection, img, Visabilty) 
+    VALUES 
+        (@BookID, @Title, @AuthorID, @CategoryID, @Price, @IsDiscount, @Discount, @InStock, @SDescription, @Description, @ReleaseDate, @NuOfPage, @Collection, @img, @Visabilty)";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@BookID", bookID);
+                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                cmd.Parameters.AddWithValue("@Price", price);
+                cmd.Parameters.AddWithValue("@IsDiscount", isDiscount);
+                cmd.Parameters.AddWithValue("@Discount", discount);
+                cmd.Parameters.AddWithValue("@InStock", inStock);
+                cmd.Parameters.AddWithValue("@SDescription", sDescription);
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+                cmd.Parameters.AddWithValue("@NuOfPage", nuOfPage);
+                cmd.Parameters.AddWithValue("@Collection", collection);
+                cmd.Parameters.AddWithValue("@img", img);
+                cmd.Parameters.AddWithValue("@Visabilty", visability);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return success;
+        }
+
 
     }
 }
