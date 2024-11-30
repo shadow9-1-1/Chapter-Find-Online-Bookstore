@@ -1043,6 +1043,40 @@ namespace Chapter_Find_Online_Bookstore.Model
 
             return success;
         }
+        public bool AddCategory(string categoryID, string categoryName, string img)
+        {
+            bool success = false;
+            string query = @"
+    INSERT INTO Categories 
+        (CategoryID, CategoryName, img) 
+    VALUES 
+        (@CategoryID, @CategoryName, @img)";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                cmd.Parameters.AddWithValue("@CategoryName", categoryName);
+                cmd.Parameters.AddWithValue("@img", img);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return success;
+        }
 
 
     }
