@@ -43,7 +43,7 @@ CREATE TABLE Customers (
 	Password VARCHAR(100),
     Name VARCHAR(100),
 	Email VARCHAR(255),
-    PhoneNumber VARCHAR(15),
+    PhoneNumber VARCHAR(15)
 );
 
 -- Create Orders Table
@@ -130,14 +130,14 @@ INSERT INTO Authors (AuthorID, Name, TopCategoryID, Description, img) VALUES
 ('4', 'Emily Johnson', '4', 'A history enthusiast and author.', 'emily_johnson.jpg');
 
 -- Insert Data into Books Table
-INSERT INTO Books (BookID, Title, AuthorID, CategoryID, Price, IsDiscount, Discount, InStock, SDescription, Description, ReleaseDate, NuOfPage, Collection, img) VALUES
-('1', 'The Great Adventure', '1', '1', 19.99, 1, 5.00, 50, 'A thrilling fiction novel.', 'A detailed story of adventure and mystery.', 2023, 350, 0, 'great_adventure.jpg'),
-('2', 'Learning Science', '3', '3', 25.99, 0, 0.00, 100, 'An introduction to modern science.', 'A comprehensive guide to basic science principles.', 2022, 200, 0, 'learning_science.jpg'),
-('3', 'The History of the World', '4', '4', 30.00, 1, 10.00, 75, 'A deep dive into world history.', 'An extensive coverage of historical events.', 2021, 500, 0, 'history_world.jpg'),
-('4', 'Adventure Chronicles: Volume 1', '1', '1', 29.99, 1, 7.00, 20, 'The first volume of an epic adventure series.', 'A captivating collection of adventure tales.', 2023, 400, 1, 'adventure_chronicles_v1.jpg'),
-('5', 'Adventure Chronicles: Volume 2', '1', '1', 29.99, 1, 7.00, 20, 'The second volume of an epic adventure series.', 'Continuation of the thrilling adventure series.', 2024, 450, 1, 'adventure_chronicles_v2.jpg'),
-('6', 'Science Explorer: Volume 1', '3', '3', 39.99, 0, 0.00, 15, 'A collection of the latest science discoveries.', 'Detailed explorations into various scientific fields.', 2022, 300, 1, 'science_explorer_v1.jpg'),
-('7', 'World History Archives: Volume 1', '4', '4', 35.00, 1, 5.00, 25, 'The first in a series of historical archives.', 'An extensive collection of historical documents and analysis.', 2021, 600, 1, 'history_archives_v1.jpg');
+INSERT INTO Books (BookID, Title, AuthorID, CategoryID, Price, IsDiscount, Discount, InStock, SDescription, Description, ReleaseDate, NuOfPage, Collection, img, Visabilty) VALUES
+('1', 'The Great Adventure', '1', '1', 19.99, 1, 5.00, 50, 'A thrilling fiction novel.', 'A detailed story of adventure and mystery.', 2023, 350, 0, 'great_adventure.jpg',1),
+('2', 'Learning Science', '3', '3', 25.99, 0, 0.00, 100, 'An introduction to modern science.', 'A comprehensive guide to basic science principles.', 2022, 200, 0, 'learning_science.jpg',1),
+('3', 'The History of the World', '4', '4', 30.00, 1, 10.00, 75, 'A deep dive into world history.', 'An extensive coverage of historical events.', 2021, 500, 0, 'history_world.jpg',1),
+('4', 'Adventure Chronicles: Volume 1', '1', '1', 29.99, 1, 7.00, 20, 'The first volume of an epic adventure series.', 'A captivating collection of adventure tales.', 2023, 400, 1, 'adventure_chronicles_v1.jpg',1),
+('5', 'Adventure Chronicles: Volume 2', '1', '1', 29.99, 1, 7.00, 20, 'The second volume of an epic adventure series.', 'Continuation of the thrilling adventure series.', 2024, 450, 1, 'adventure_chronicles_v2.jpg',1),
+('6', 'Science Explorer: Volume 1', '3', '3', 39.99, 0, 0.00, 15, 'A collection of the latest science discoveries.', 'Detailed explorations into various scientific fields.', 2022, 300, 1, 'science_explorer_v1.jpg',1),
+('7', 'World History Archives: Volume 1', '4', '4', 35.00, 1, 5.00, 25, 'The first in a series of historical archives.', 'An extensive collection of historical documents and analysis.', 2021, 600, 1, 'history_archives_v1.jpg',1);
 
 -- Insert Data into Customers Table
 INSERT INTO Customers (CustomerID, Username, Password, Name) VALUES
