@@ -19,128 +19,136 @@
 
 
 <br />
-<div class="box box-warning">
-    
-    <div class="box-body">
-        <form method="post" enctype="multipart/form-data" role="form">
-            <!-- Book Title -->
-            <div class="form-group">
-                <label for="title">Book Title</label>
-                <input type="text" id="title" class="form-control" asp-for="title" placeholder="Enter book title" required />
-            </div>
 
-            <!-- Author and Category -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="authorID">Author</label>
-                        <select id="authorID" class="form-control" asp-for="authorID" required>
-                            <option value="" disabled selected>Select an author</option>
-                            @for (int i = 0; i < Model.Table.Rows.Count; i++)
-                            {
-                                <option value="@Model.Table.Rows[i][0]">@Model.Table.Rows[i][1]</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="categoryID">Category</label>
-                        <select id="categoryID" class="form-control" asp-for="categoryID" required>
-                            <option value="" disabled selected>Select a category</option>
-                            @for (int i = 0; i < Model.Table1.Rows.Count; i++)
-                            {
-                                <option value="@Model.Table1.Rows[i][0]">@Model.Table1.Rows[i][1]</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-            </div>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
 
-            <!-- Price and Discount -->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="number" id="price" class="form-control" asp-for="price" placeholder="0.00" step="0.01" required />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Discount Status</label>
-                        <div>
-                            <label class="radio-inline">
-                                <input type="radio" id="discountYes" name="isDiscount" value="1" asp-for="isDiscount" /> Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" id="discountNo" name="isDiscount" value="0" asp-for="isDiscount" /> No
-                            </label>
+            <div class="box">
+
+                <div class="box-body">
+                    <form method="post" enctype="multipart/form-data" role="form">
+                        <!-- Book Title -->
+                        <div class="form-group">
+                            <label for="title">Book Title</label>
+                            <input type="text" id="title" class="form-control" asp-for="title" placeholder="Enter book title" required />
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="discount">Price After Discount</label>
-                        <input type="number" id="discount" class="form-control" asp-for="discount" step="0.01" required />
-                    </div>
-                </div>
-            </div>
 
-            <!-- Stock and Additional Details -->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="inStock">Stock Quantity</label>
-                        <input type="number" id="inStock" class="form-control" asp-for="inStock" required />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="releaseDate">Release Year</label>
-                        <input type="number" id="releaseDate" class="form-control" asp-for="releaseDate" required />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="pages">Number of Pages</label>
-                        <input type="number" id="pages" class="form-control" asp-for="pages" required />
-                    </div>
-                </div>
-            </div>
+                        <!-- Author and Category -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="authorID">Author</label>
+                                    <select id="authorID" class="form-control" asp-for="authorID" required>
+                                        <option value="" disabled selected>Select an author</option>
+                                        @for (int i = 0; i < Model.Table.Rows.Count; i++)
+                                        {
+                                            <option value="@Model.Table.Rows[i][0]">@Model.Table.Rows[i][1]</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="categoryID">Category</label>
+                                    <select id="categoryID" class="form-control" asp-for="categoryID" required>
+                                        <option value="" disabled selected>Select a category</option>
+                                        @for (int i = 0; i < Model.Table1.Rows.Count; i++)
+                                        {
+                                            <option value="@Model.Table1.Rows[i][0]">@Model.Table1.Rows[i][1]</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Visibility -->
-            <div class="form-group">
-                <label>Visibility Status</label>
-                <div>
-                    <label class="radio-inline">
-                        <input type="radio" id="visabilityYes" name="visability" value="1" asp-for="visability" /> Visible
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" id="visabilityNo" name="visability" value="0" asp-for="visability" /> Not Visible
-                    </label>
-                </div>
-            </div>
+                        <!-- Price and Discount -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="price">Price</label>
+                                    <input type="number" id="price" class="form-control" asp-for="price" placeholder="0.00" step="0.01" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Discount Status</label>
+                                    <div>
+                                        <label class="radio-inline">
+                                            <input type="radio" id="discountYes" name="isDiscount" value="1" asp-for="isDiscount" /> Yes
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" id="discountNo" name="isDiscount" value="0" asp-for="isDiscount" /> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="discount">Price After Discount</label>
+                                    <input type="number" id="discount" class="form-control" asp-for="discount" step="0.01" required />
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Descriptions -->
-            <div class="form-group">
-                <label for="Sdescription">Short Description</label>
-                <textarea id="Sdescription" class="form-control" asp-for="Sdescription" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="description">Full Description</label>
-                <textarea id="description" class="form-control" asp-for="description" rows="5" required></textarea>
-            </div>
+                        <!-- Stock and Additional Details -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inStock">Stock Quantity</label>
+                                    <input type="number" id="inStock" class="form-control" asp-for="inStock" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="releaseDate">Release Year</label>
+                                    <input type="number" id="releaseDate" class="form-control" asp-for="releaseDate" required />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="pages">Number of Pages</label>
+                                    <input type="number" id="pages" class="form-control" asp-for="pages" required />
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Image Upload -->
-            <div class="form-group">
-                <label for="image">Upload Book Cover Image</label>
-                <input type="file" id="image" class="form-control" asp-for="ImageFile" required />
-            </div>
+                        <!-- Visibility -->
+                        <div class="form-group">
+                            <label>Visibility Status</label>
+                            <div>
+                                <label class="radio-inline">
+                                    <input type="radio" id="visabilityYes" name="visability" value="1" asp-for="visability" /> Visible
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="visabilityNo" name="visability" value="0" asp-for="visability" /> Not Visible
+                                </label>
+                            </div>
+                        </div>
 
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Add Book</button>
-            </div>
-        </form>
-    </div><!-- /.box-body -->
-</div><!-- /.box -->
+                        <!-- Descriptions -->
+                        <div class="form-group">
+                            <label for="Sdescription">Short Description</label>
+                            <textarea id="Sdescription" class="form-control" asp-for="Sdescription" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Full Description</label>
+                            <textarea id="description" class="form-control" asp-for="description" rows="5" required></textarea>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="form-group">
+                            <label for="image">Upload Book Cover Image</label>
+                            <input type="file" id="image" class="form-control" asp-for="ImageFile" required />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Add Book</button>
+                        </div>
+                    </form>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

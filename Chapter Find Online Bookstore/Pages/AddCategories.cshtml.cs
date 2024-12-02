@@ -6,8 +6,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
 {
     public class AddCategoriesModel : PageModel
     {
-        [BindProperty]
-        public string Username1 { get; set; }
+       
         [BindProperty]
         public string name { get; set; }
         [BindProperty]
@@ -23,7 +22,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
         }
         public void OnGet()
         {
-            Username1 = t1.AUsername;
+            
         }
         public async Task<IActionResult> OnPostAsync()
         {
@@ -48,7 +47,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
 
                 // Insert the book data into the database
                 output = t1.AddCategory(id, name, newFileName);
-                return RedirectToPage("/Admin");
+                return RedirectToPage("/CategoriesList");
             }
             catch (Exception ex)
             {

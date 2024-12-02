@@ -1,0 +1,93 @@
+﻿@page
+@model Chapter_Find_Online_Bookstore.Pages.NOrdersModel
+@{
+    ViewData["Title"] = "New Orders";
+    Layout = "_Layout1";
+}
+
+<section class="content-header">
+    <h1>
+        New Orders
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">New Orders</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">New Orders With Details</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Shipping Address</th>
+                                <th>Phone Number</th>
+                                <th>Total Books</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Table.Rows.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.Table.Rows[i][0]</td>
+                                    <td>@Model.Table.Rows[i][1]</td>
+                                    <td>@(((DateTime)Model.Table.Rows[i][2]).ToString("dd-MMM-yy"))</td>
+                                    <td>@Model.Table.Rows[i][3]</td>
+                                    <td>@Model.Table.Rows[i][4]</td>
+                                    <td>@Model.Table.Rows[i][5]</td>
+                                    <td>@Model.Table.Rows[i][6]</td>
+                                    <td>@Model.Table.Rows[i][7]</td>
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Order Date</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Shipping Address</th>
+                                <th>Phone Number</th>
+                                <th>Total Books</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+
+
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $("#example1").dataTable();
+        $('#example2').dataTable({
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": false
+        });
+    });
+</script>

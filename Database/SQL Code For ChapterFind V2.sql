@@ -41,7 +41,9 @@ CREATE TABLE Customers (
     CustomerID VARCHAR(100) PRIMARY KEY,
 	Username VARCHAR(100),
 	Password VARCHAR(100),
-    Name VARCHAR(100)
+    Name VARCHAR(100),
+	Email VARCHAR(255),
+    PhoneNumber VARCHAR(15),
 );
 
 -- Create Orders Table
@@ -69,11 +71,13 @@ CREATE TABLE OrderDetails (
 
 -- Create Admin Table
 CREATE TABLE Admin (
+	Username VARCHAR(100) PRIMARY KEY,
+    Password VARCHAR(100),
     Name VARCHAR(100),
     Email VARCHAR(255),
     PhoneNumber VARCHAR(15),
-    Username VARCHAR(100) PRIMARY KEY,
-    Password VARCHAR(100)
+	Title VARCHAR(15)
+    
 );
 
 -- Create Staff Table
@@ -152,8 +156,8 @@ INSERT INTO OrderDetails (OrderID, BookID, Quantity, UnitPrice) VALUES
 ('2', '2', 1, 25.99);
 
 -- Insert Data into Admin Table
-INSERT INTO Admin (Name, Email, PhoneNumber, Username, Password) VALUES
-('Admin User', 'admin@example.com', '1234567890', 'admin_user', 'adminpass');
+INSERT INTO Admin (Name, Email, PhoneNumber, Username, Password, Title) VALUES
+('Admin User', 'admin@example.com', '1234567890', 'admin_user', 'adminpass','Admin Test');
 
 -- Insert Data into Staff Table
 INSERT INTO Staff (Name, Email, PhoneNumber, Username, Password, AuthorityLevel) VALUES

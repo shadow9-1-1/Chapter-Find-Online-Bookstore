@@ -8,11 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\NewOrders.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\NewOrders.cshtml" />
     <None Include="wwwroot\AdminLayout\bootstrap\css\bootstrap.css.map" />
     <None Include="wwwroot\AdminLayout\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\AdminLayout\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
@@ -408,6 +413,14 @@
     <None Include="wwwroot\AdminLayout\plugins\sparkline\jquery.sparkline.min.js" />
     <None Include="wwwroot\AdminLayout\plugins\timepicker\bootstrap-timepicker.js" />
     <None Include="wwwroot\AdminLayout\plugins\timepicker\bootstrap-timepicker.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\NewOrders.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\NewOrders.cshtml" />
   </ItemGroup>
 
 </Project>

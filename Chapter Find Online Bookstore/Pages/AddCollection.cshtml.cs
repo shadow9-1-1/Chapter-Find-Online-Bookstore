@@ -7,8 +7,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
 {
     public class AddCollectionModel : PageModel
     {
-        [BindProperty]
-        public string Username1 { get; set; }
+        
 
 
         public string UserError { get; set; }
@@ -58,7 +57,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
         }
         public void OnGet()
         {
-            Username1 = t1.AUsername;
+            
             Table = t1.ShowTable("Authors");
             Table1 = t1.ShowTable("Categories");
 
@@ -97,7 +96,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
 
                 // Insert the book data into the database
                 output = t1.AddBook(id, title, authorID, categoryID, price, isDiscount, discount, inStock, Sdescription, description, releaseDate, pages, 1, newFileName, visability);
-                return RedirectToPage("/Admin");
+                return RedirectToPage("/CollectionsList");
             }
             catch (Exception ex)
             {

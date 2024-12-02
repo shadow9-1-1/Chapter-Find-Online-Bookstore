@@ -7,53 +7,64 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    
+    <h1>
+        Add New Authors
+        <small>Control panel</small>
+    </h1>
     <ol class="breadcrumb">
         <li><a href="Admin"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Add Authors</li>
     </ol>
 </section>
 <br />
-<div class="box box-warning">
-    <div class="box-header">
-        <h3 class="box-title">Add Author</h3>
-    </div><!-- /.box-header -->
-    <div class="box-body">
-        <form method="post" enctype="multipart/form-data" role="form" id="authorForm">
-            <!-- Author Name -->
-            <div class="form-group">
-                <label for="name">Author Name</label>
-                <input type="text" id="name" class="form-control" placeholder="Enter author name" asp-for="name" required />
-            </div>
 
-            <!-- Top Category Selection -->
-            <div class="form-group">
-                <label for="topCategoryID">Top Category</label>
-                <select id="topCategoryID" class="form-control" asp-for="topCategoryID" required>
-                    <option value="" disabled selected>Select a category</option>
-                    @for (int i = 0; i < Model.Table1.Rows.Count; i++)
-                    {
-                        <option value="@Model.Table1.Rows[i][0]">@Model.Table1.Rows[i][1]</option>
-                    }
-                </select>
-            </div>
 
-            <!-- Author Description -->
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" class="form-control" rows="3" placeholder="Enter author description" asp-for="description" required></textarea>
-            </div>
 
-            <!-- Author Image Upload -->
-            <div class="form-group">
-                <label for="img">Upload Author Image</label>
-                <input type="file" id="img" class="form-control" asp-for="ImageFile" required />
-            </div>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
 
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Add Author</button>
-            </div>
-        </form>
-    </div><!-- /.box-body -->
-</div><!-- /.box -->
+            <div class="box">
+
+                <div class="box-body">
+                    <form method="post" enctype="multipart/form-data" role="form" id="authorForm">
+                        <!-- Author Name -->
+                        <div class="form-group">
+                            <label for="name">Author Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter author name" asp-for="name" required />
+                        </div>
+
+                        <!-- Top Category Selection -->
+                        <div class="form-group">
+                            <label for="topCategoryID">Top Category</label>
+                            <select id="topCategoryID" class="form-control" asp-for="topCategoryID" required>
+                                <option value="" disabled selected>Select a category</option>
+                                @for (int i = 0; i < Model.Table1.Rows.Count; i++)
+                                {
+                                    <option value="@Model.Table1.Rows[i][0]">@Model.Table1.Rows[i][1]</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Author Description -->
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" class="form-control" rows="3" placeholder="Enter author description" asp-for="description" required></textarea>
+                        </div>
+
+                        <!-- Author Image Upload -->
+                        <div class="form-group">
+                            <label for="img">Upload Author Image</label>
+                            <input type="file" id="img" class="form-control" asp-for="ImageFile" required />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Add Author</button>
+                        </div>
+                    </form>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->

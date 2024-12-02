@@ -1,0 +1,121 @@
+﻿@page
+@model Chapter_Find_Online_Bookstore.Pages.CollectionsListModel
+@{
+    ViewData["Title"] = " Collections";
+    Layout = "_Layout1";
+}
+
+<section class="content-header">
+    <h1>
+        Collections List
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="Admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"> Collections</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">All Collections With Details</h3>
+                    <a href="AddCollection" class="btn btn-primary pull-right" style="margin-top: -5px;">
+                        Add Collection
+                    </a>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Collections ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Discount</th>
+                                <th>InStock</th>
+                                <th>SDescription</th>
+                                <th>Release Date</th>
+                                <th>Pages</th>
+                                <th>Visibility</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Table.Rows.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.Table.Rows[i][0]</td>
+                                    <td>@Model.Table.Rows[i][1]</td>
+                                    <td>@Model.Table.Rows[i][2]</td>
+                                    <td>@Model.Table.Rows[i][3]</td>
+                                    <td>@Model.Table.Rows[i][4]</td>
+                                    <td>
+                                        @if (Convert.ToInt32(Model.Table.Rows[i]["IsDiscount"]) == 1)
+                                        {
+                                            @Model.Table.Rows[i]["Discount"]
+                                        }
+                                        else
+                                        {
+                                            @("--")
+                                        }
+                                    </td>
+                                    <td>@Model.Table.Rows[i][7]</td>
+                                    <td>@Model.Table.Rows[i][8]</td>
+                                    <td>@Model.Table.Rows[i][9]</td>
+                                    <td>@Model.Table.Rows[i][10]</td>
+                                    <td>
+                                        @if (Convert.ToInt32(Model.Table.Rows[i]["Visabilty"]) == 1)
+                                        {
+                                            @("Visible")
+                                        }
+                                        else
+                                        {
+                                            @("Hidden")
+                                        }
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Collections ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Discount</th>
+                                <th>InStock</th>
+                                <th>SDescription</th>
+                                <th>Release Date</th>
+                                <th>Pages</th>
+                                <th>Visibility</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</section><!-- /.content -->
+<!-- page script -->
+<script type="text/javascript">
+    $(function () {
+        $("#example1").dataTable();
+        $('#example2').dataTable({
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": false
+        });
+    });
+</script>

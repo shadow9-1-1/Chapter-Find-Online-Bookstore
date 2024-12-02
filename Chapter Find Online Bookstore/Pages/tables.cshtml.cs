@@ -13,6 +13,13 @@ namespace Chapter_Find_Online_Bookstore.Pages
         public DataTable Table2 { get; set; }
 
         public DataTable Table3 { get; set; }
+        public DataTable Table4 { get; set; }
+        public DataTable Table5 { get; set; }
+        public DataTable Table6 { get; set; }
+        public DataTable Table7 { get; set; }
+        public DataTable Table8 { get; set; }
+
+
 
         private readonly ILogger<tablesModel> _logger;
 
@@ -24,9 +31,17 @@ namespace Chapter_Find_Online_Bookstore.Pages
 
         public void OnGet()
         {
-            Table = t1.GetBooksAdmin();
-            Table1 = t1.GetCollectionAdmin();
-            Table2 = t1.ShowTable("Categories");
+            
+            //----------------------------------//
+            Table = t1.GetAllCustomers();
+            Table1 = t1.GetAllAdmins();
+            Table2 = t1.GetAllCategories();
+            Table3 = t1.GetAllAuthors();
+            Table4 = t1.GetAllBooks();
+            Table5 = t1.GetAllCollections();
+            Table6 = t1.GetAllOrdersWithDetails();
+            Table7 = t1.GetAllShippingCosts();
+
         }
     }
 }

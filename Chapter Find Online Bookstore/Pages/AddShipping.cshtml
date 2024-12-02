@@ -1,19 +1,19 @@
 ﻿@page
-@model Chapter_Find_Online_Bookstore.Pages.AddCategoriesModel
+@model Chapter_Find_Online_Bookstore.Pages.AddShippingModel
 @{
-    ViewData["Title"] = "Add Category";
+    ViewData["Title"] = "Add Shipping";
     Layout = "_Layout1";
 }
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Add New Category
+        Add New Shipping Cost Location
         <small>Control panel</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="Admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Add Category</li>
+        <li class="active">Add Shipping</li>
     </ol>
 </section>
 <br />
@@ -24,24 +24,26 @@
         <div class="col-xs-12">
 
             <div class="box">
-                
+
                 <div class="box-body">
-                    <form method="post" enctype="multipart/form-data" role="form" id="categoryForm">
+                    <form method="post">
                         <!-- Category Name -->
                         <div class="form-group">
-                            <label for="categoryName">Category Name</label>
-                            <input type="text" id="categoryName" class="form-control" placeholder="Enter category name" asp-for="@Model.name" required />
+                            <label for="CityName">City Name</label>
+                            <input type="text" id="CityName" class="form-control" placeholder="Enter City name" asp-for="@Model.CityName" required />
                         </div>
 
-                        <!-- Category Image Upload -->
                         <div class="form-group">
-                            <label for="img">Upload Category Image</label>
-                            <input type="file" id="img" class="form-control" asp-for="ImageFile" required />
+                            <label for="Cost">Cost</label>
+                            <input type="number" step="any" id="Cost" class="form-control" placeholder="Enter Cost" asp-for="@Model.Cost" required />
                         </div>
+
+                        
+                        
 
                         <!-- Submit Button -->
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Add Category</button>
+                            <button type="submit" class="btn btn-primary">Add Location</button>
                         </div>
                     </form>
                 </div><!-- /.box-body -->

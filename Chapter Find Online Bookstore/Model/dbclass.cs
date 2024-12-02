@@ -41,7 +41,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         {
 
 
-            string SQLcon = "Data Source=Salakawy;Initial Catalog=ChapterFind;Integrated Security=True;";
+            string SQLcon = "Data Source=AHMED;Initial Catalog=ChapterFind;Integrated Security=True;";
 
             con = new SqlConnection(SQLcon);
         }
@@ -778,7 +778,389 @@ namespace Chapter_Find_Online_Bookstore.Model
 
             return dt;
         }
+        public DataTable GetNewOrdersWithDetails()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                O.OrderID,
+                C.Name AS CustomerName,
+                O.OrderDate,
+                O.TotalAmount,
+                O.Status,
+                O.ShippingAddress,
+                O.PhoneNumber,
+                COUNT(OD.BookID) AS TotalBooksOrdered
+            FROM 
+                Orders O
+            INNER JOIN 
+                Customers C ON O.CustomerID = C.CustomerID
+            INNER JOIN 
+                OrderDetails OD ON O.OrderID = OD.OrderID
+            WHERE 
+                O.Status = @Status
+            GROUP BY 
+                O.OrderID, C.Name, O.OrderDate, O.TotalAmount, O.Status, O.ShippingAddress, O.PhoneNumber";
 
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Status", "waiting to confirm");
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllOrdersWithDetails()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                O.OrderID,
+                C.Name AS CustomerName,
+                O.OrderDate,
+                O.TotalAmount,
+                O.Status,
+                O.ShippingAddress,
+                O.PhoneNumber,
+                COUNT(OD.BookID) AS TotalBooksOrdered
+            FROM 
+                Orders O
+            INNER JOIN 
+                Customers C ON O.CustomerID = C.CustomerID
+            INNER JOIN 
+                OrderDetails OD ON O.OrderID = OD.OrderID
+            GROUP BY 
+                O.OrderID, C.Name, O.OrderDate, O.TotalAmount, O.Status, O.ShippingAddress, O.PhoneNumber
+            ORDER BY 
+                O.OrderDate DESC"; // Orders by date in descending order.
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllCustomers()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                C.CustomerID,
+                C.Name AS CustomerName,
+                C.Username,
+                C.Email,
+                C.PhoneNumber,
+                COUNT(O.OrderID) AS TotalOrders,
+                COUNT(DISTINCT A.City) AS AddressCount
+            FROM 
+                Customers C
+            LEFT JOIN 
+                Orders O ON C.CustomerID = O.CustomerID
+            LEFT JOIN 
+                CustomersAddress A ON C.CustomerID = A.CustomerID
+            GROUP BY 
+                C.CustomerID, C.Name, C.Username, C.Email, C.PhoneNumber";
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllAdmins()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                Username,
+                Name,
+                Email,
+                PhoneNumber,
+                Title
+            FROM 
+                Admin";
+         
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllCategories()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                CategoryID,
+                CategoryName,
+                img
+            FROM 
+                Categories";            
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllAuthors()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                A.AuthorID,
+                A.Name AS AuthorName,
+                A.Description,
+                A.img AS AuthorImage,
+                C.CategoryName AS TopCategory
+            FROM 
+                Authors A
+            LEFT JOIN 
+                Categories C ON A.TopCategoryID = C.CategoryID";
+            
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllBooks()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                B.BookID,
+                B.Title,
+                A.Name AS AuthorName,
+                C.CategoryName,
+                B.Price,
+                B.IsDiscount,
+                B.Discount,
+                B.InStock,
+                B.SDescription,
+                B.ReleaseDate,
+                B.NuOfPage,
+                B.img AS BookImage,
+                B.Visabilty
+            FROM 
+                Books B
+            LEFT JOIN 
+                Authors A ON B.AuthorID = A.AuthorID
+            LEFT JOIN 
+                Categories C ON B.CategoryID = C.CategoryID
+            Where B.Collection = 0";
+
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllCollections()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                B.BookID,
+                B.Title,
+                A.Name AS AuthorName,
+                C.CategoryName,
+                B.Price,
+                B.IsDiscount,
+                B.Discount,
+                B.InStock,
+                B.SDescription,
+                B.ReleaseDate,
+                B.NuOfPage,
+                B.img AS BookImage,
+                B.Visabilty
+            FROM 
+                Books B
+            LEFT JOIN 
+                Authors A ON B.AuthorID = A.AuthorID
+            LEFT JOIN 
+                Categories C ON B.CategoryID = C.CategoryID
+            Where B.Collection = 1";
+
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
+        public DataTable GetAllShippingCosts()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+            SELECT 
+                City, 
+                Cost 
+            FROM 
+                ShippingCost";
+            
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle exception (e.g., log the error)
+                Console.WriteLine("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return dt;
+        }
 
         public DataTable GetBooksAdmin()
         {
@@ -951,6 +1333,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         }
 
 
+
         public bool AddBook(string bookID, string title, string authorID, string categoryID, decimal price, int isDiscount, decimal discount, int inStock, string sDescription, string description, int releaseDate, int nuOfPage, int collection, string img, int visability)
         {
             bool success = false;
@@ -1113,6 +1496,35 @@ namespace Chapter_Find_Online_Bookstore.Model
 
             return success;
         }
+        public bool AddShippingCost(string city, decimal cost)
+        {
+            string query = @"
+            INSERT INTO ShippingCost (City, Cost) 
+            VALUES (@City, @Cost)";
+
+            try
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@City", city);
+                    cmd.Parameters.AddWithValue("@Cost", cost);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("An error occurred while adding the shipping cost: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
 
     }
 }

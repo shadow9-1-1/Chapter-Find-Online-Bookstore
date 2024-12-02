@@ -136,8 +136,8 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All Orders</a></li>
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> New Orders</a></li>
+                            <li><a href="AllOrders"><i class="fa fa-circle-o"></i> All Orders</a></li>
+                            <li><a href="NOrders"><i class="fa fa-circle-o"></i> New Orders</a></li>
                             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Update Orders</a></li>
 
                         </ul>
@@ -149,14 +149,14 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Customers</a></li>
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Admins</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Categories</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Authors</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Books</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Collections</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Orders</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Shipping Cost</a></li>
+                            <li><a href="CustomerList"><i class="fa fa-circle-o"></i> Customers</a></li>
+                            <li><a href="AdminList"><i class="fa fa-circle-o"></i> Admins</a></li>
+                            <li><a href="CategoriesList"><i class="fa fa-circle-o"></i> Categories</a></li>
+                            <li><a href="AuthorsList"><i class="fa fa-circle-o"></i> Authors</a></li>
+                            <li><a href="BooksList"><i class="fa fa-circle-o"></i> Books</a></li>
+                            <li><a href="CollectionsList"><i class="fa fa-circle-o"></i> Collections</a></li>
+                            <li><a href="AllOrders"><i class="fa fa-circle-o"></i> Orders</a></li>
+                            <li><a href="ShippingList"><i class="fa fa-circle-o"></i> Shipping Cost</a></li>
                             
                         </ul>
                     </li>
@@ -167,7 +167,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All Books</a></li>
+                            <li><a href="BooksList"><i class="fa fa-circle-o"></i> All Books</a></li>
                             <li><a href="AddBook"><i class="fa fa-circle-o"></i> Add Book</a></li>
                             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Update Book</a></li>
                             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Control Book</a></li>
@@ -182,7 +182,7 @@
                         <ul class="treeview-menu">
                             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All collections</a></li>
                             <li><a href="AddCollection"><i class="fa fa-circle-o"></i> Add collections</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Update collections</a></li>
+                            <li><a href="CollectionsList"><i class="fa fa-circle-o"></i> Update collections</a></li>
                             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Control collections</a></li>
                         </ul>
                     </li>
@@ -194,7 +194,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All Authors</a></li>
+                            <li><a href="AuthorsList"><i class="fa fa-circle-o"></i> All Authors</a></li>
                             <li><a href="AddAuthors"><i class="fa fa-circle-o"></i> Add Author</a></li>
                         </ul>
                     </li>
@@ -205,7 +205,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All Categorys</a></li>
+                            <li><a href="CategoriesList"><i class="fa fa-circle-o"></i> All Categorys</a></li>
                             <li><a href="AddCategories"><i class="fa fa-circle-o"></i> Add Category</a></li>
                         </ul>
                     </li>
@@ -217,7 +217,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All Admins</a></li>
+                            <li><a href="AdminList"><i class="fa fa-circle-o"></i> All Admins</a></li>
                             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Add Admin</a></li>
                             <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Remove Admin</a></li>
                         </ul>
@@ -228,8 +228,21 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> All Customers</a></li>
+                            <li><a href="CustomerList"><i class="fa fa-circle-o"></i> All Customers</a></li>
                             <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Add Customer</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-money"></i> <span>Shipping</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="ShippingList"><i class="fa fa-circle-o"></i> Shipping Cost</a></li>
+                            <li><a href="AddShipping"><i class="fa fa-circle-o"></i> Add Shipping Cost</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> Update Shipping Cost</a></li>
+                            
+
                         </ul>
                     </li>
 

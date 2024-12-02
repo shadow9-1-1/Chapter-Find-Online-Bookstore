@@ -57,7 +57,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
 
                 // Insert the book data into the database
                 output = t1.AddAuthors(id, name, topCategoryID, description, newFileName);
-                return RedirectToPage("/Admin");
+                return RedirectToPage("/AuthorsList");
             }
             catch (Exception ex)
             {
