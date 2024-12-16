@@ -41,7 +41,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         {
 
 
-            string SQLcon = "Data Source=SQL6033.site4now.net,1433;Initial Catalog=db_ab018a_chapterfind;User Id=db_ab018a_chapterfind_admin;Password=01020Sh@;";
+            string SQLcon = "Data Source=AHMED;Initial Catalog=ChapterFind;Integrated Security=True;";
 
             con = new SqlConnection(SQLcon);
         }
@@ -103,7 +103,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -146,7 +146,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -172,7 +172,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -204,7 +204,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -245,7 +245,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -287,7 +287,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -317,7 +317,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -361,7 +361,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -407,7 +407,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -452,7 +452,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -495,7 +495,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -528,7 +528,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle SQL exception (e.g., log the error)
+                
             }
             finally
             {
@@ -572,7 +572,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -616,7 +616,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -655,12 +655,12 @@ namespace Chapter_Find_Online_Bookstore.Model
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); // Use wildcards for partial matches
+                cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); 
                 dt.Load(cmd.ExecuteReader());
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -699,12 +699,12 @@ namespace Chapter_Find_Online_Bookstore.Model
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); // Use wildcards for partial matches
+                cmd.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); 
                 dt.Load(cmd.ExecuteReader());
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -732,12 +732,12 @@ namespace Chapter_Find_Online_Bookstore.Model
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@searchTerm", "%" + authorName + "%"); // Using wildcards for partial match
+                cmd.Parameters.AddWithValue("@searchTerm", "%" + authorName + "%"); 
                 dt.Load(cmd.ExecuteReader());
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -769,7 +769,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -816,7 +816,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -848,7 +848,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             GROUP BY 
                 O.OrderID, C.Name, O.OrderDate, O.TotalAmount, O.Status, O.ShippingAddress, O.PhoneNumber
             ORDER BY 
-                O.OrderDate DESC"; // Orders by date in descending order.
+                O.OrderDate DESC"; 
 
             try
             {
@@ -863,7 +863,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -907,7 +907,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -944,7 +944,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -978,7 +978,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -1017,7 +1017,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -1067,7 +1067,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -1117,7 +1117,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -1151,7 +1151,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -1195,7 +1195,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -1237,7 +1237,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -1371,7 +1371,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -1417,7 +1417,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -1451,7 +1451,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
@@ -1487,7 +1487,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                // Handle exception (e.g., log the error)
+                
             }
             finally
             {
