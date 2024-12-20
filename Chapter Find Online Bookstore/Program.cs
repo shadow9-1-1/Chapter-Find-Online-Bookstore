@@ -29,7 +29,7 @@ services.AddAuthentication().AddGoogle(googleOptions =>
     googleOptions.ClientSecret = "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";
 });
 
-
+///////
 
 
 var app = builder.Build();
