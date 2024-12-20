@@ -1,4 +1,353 @@
 ﻿@page
 @model Chapter_Find_Online_Bookstore.Pages.userModel
 @{
+    ViewData["Title"] = "User Profile";
 }
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1>Welcome, @Model.appUser?.FirstName!</h1>
+                <p>Select a service to proceed:</p>
+            </div>
+
+            <form id="serviceSelectionForm" method="get" class="d-grid gap-3">
+                <div class="form-group">
+                    <label for="serviceSelection" class="form-label">Choose a Service:</label>
+                    <select id="serviceSelection" name="service" class="form-select" required>
+                        <option value="">-- Select a Service --</option>
+                        <option value="/service1">Service 1</option>
+                        <option value="/service2">Service 2</option>
+                        <option value="/service3">Service 3</option>
+                        <option value="/service4">Service 4</option>
+                    </select>
+                </div>
+
+                <button type="button" id="goToService" class="btn btn-primary">Go to Service</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('goToService').addEventListener('click', function () {
+            const selectedService = document.getElementById('serviceSelection').value;
+            if (selectedService) {
+                window.location.href = selectedService;
+            } else {
+                alert('Please select a service before proceeding.');
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+ *@
+@* <style>
+    .profile-header {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        padding: 20px;
+        border-radius: 10px 10px 0 0;
+        text-align: center;
+    }
+
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid white;
+        margin-top: -60px;
+    }
+
+    .profile-info {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+        .profile-info h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .profile-info p {
+            color: #666;
+        }
+
+    .services-section {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .service-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+        text-align: center;
+        padding: 20px;
+    }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .service-card button {
+            background: #2575fc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .service-card button:hover {
+                background: #0056b3;
+            }
+</style>
+
+<div class="profile-header">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <img src="/img/User IMG.jpg" alt="Profile Picture" class="profile-picture">
+    <div class="profile-info">
+        <h2>@Model.appUser?.UserName !</h2>
+        <p>Member since: @Model.appUser?.CreatedAt.ToString("D")</p>
+    </div>
+</div>
+
+<div class="services-section">
+    <div class="service-card">
+        <img src="https://via.placeholder.com/80" alt="Service 1">
+        <h3>Service 1</h3>
+        <p>Access your first service here.</p>
+        <button onclick="location.href='/Service1'">Go to Service 1</button>
+    </div>
+
+    <div class="service-card">
+        <img src="https://via.placeholder.com/80" alt="Service 2">
+        <h3>Service 2</h3>
+        <p>Manage your settings or data.</p>
+        <button onclick="location.href='/Service2'">Go to Service 2</button>
+    </div>
+
+    <div class="service-card">
+        <img src="https://via.placeholder.com/80" alt="Service 3">
+        <h3>Service 3</h3>
+        <p>Explore additional features.</p>
+        <button onclick="location.href='/Service3'">Go to Service 3</button>
+    </div>
+
+    <div class="service-card">
+        <img src="https://via.placeholder.com/80" alt="Service 4">
+        <h3>Service 4</h3>
+        <p>Discover more tools and options.</p>
+        <button onclick="location.href='/Service4'">Go to Service 4</button>
+    </div>
+</div>
+ *@
+
+<style>
+    .profile-header {
+        position: relative;
+        background: url('img/background profile.jpg') center/cover no-repeat; height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .profile-picture {
+        position: absolute;
+        bottom: -50px;
+        width: 120px;
+        height: 120px;
+        border: 5px solid white;
+        border-radius: 50%;
+        background: white;
+        overflow: hidden;
+    }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .profile-info {
+        margin-top: 80px;
+        text-align: center;
+    }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: #777;
+            font-size: 1rem;
+        }
+
+    .service-cards {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+    .service-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+    .service-card-body {
+        padding: 15px;
+    }
+
+    .service-card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .service-card-text {
+        color: #555;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .service-card button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        font-size: 0.9rem;
+        transition: background-color 0.3s ease;
+    }
+
+        .service-card button:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="profile-header">
+    <div class="profile-picture">
+        <img src="~/img/User IMG.jpg" alt="Profile Picture">
+    </div>
+</div>
+
+<div class="profile-info">
+    <h1>@Model.appUser?.FirstName @Model.appUser?.LastName</h1>
+    <p>Member since: @Model.appUser?.CreatedAt.ToString("D")</p>
+    <p>Welcome to your profile. Select a service below to proceed.</p>
+</div>
+
+<div class="container mt-4">
+    <div class="service-cards">
+        <div class="service-card">
+            <img src="https://via.placeholder.com/300" alt="Service 1">
+            <div class="service-card-body">
+                <h3 class="service-card-title">Service 1</h3>
+                <p class="service-card-text">Description of Service 1. A brief overview of what it offers.</p>
+                <button onclick="window.location.href='/service1'">Go to Service 1</button>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://via.placeholder.com/300" alt="Service 2">
+            <div class="service-card-body">
+                <h3 class="service-card-title">Service 2</h3>
+                <p class="service-card-text">Description of Service 2. A brief overview of what it offers.</p>
+                <button onclick="window.location.href='/service2'">Go to Service 2</button>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://via.placeholder.com/300" alt="Service 3">
+            <div class="service-card-body">
+                <h3 class="service-card-title">Service 3</h3>
+                <p class="service-card-text">Description of Service 3. A brief overview of what it offers.</p>
+                <button onclick="window.location.href='/service3'">Go to Service 3</button>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <img src="https://via.placeholder.com/300" alt="Service 4">
+            <div class="service-card-body">
+                <h3 class="service-card-title">Service 4</h3>
+                <p class="service-card-text">Description of Service 4. A brief overview of what it offers.</p>
+                <button onclick="window.location.href='/service4'">Go to Service 4</button>
+            </div>
+        </div>
+    </div>
+</div>
