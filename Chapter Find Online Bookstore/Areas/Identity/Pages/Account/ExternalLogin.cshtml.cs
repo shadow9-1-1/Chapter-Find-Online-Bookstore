@@ -85,6 +85,21 @@ namespace Chapter_Find_Online_Bookstore.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Required(ErrorMessage = "The Phone Number is required.")]
+            [StringLength(11, ErrorMessage = "The {0} must be exactly 11 digits long.", MinimumLength = 11)]
+            [RegularExpression(@"^01\d{9}$", ErrorMessage = "The Phone Number must start with '01' and contain exactly 11 digits.")]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -157,12 +172,20 @@ namespace Chapter_Find_Online_Bookstore.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+
+                // Set additional fields
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.PhoneNumber = Input.PhoneNumber;
+                user.CreatedAt = DateTime.Now;
+
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+                        await _userManager.AddToRoleAsync(user, "customers");
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
                         var userId = await _userManager.GetUserIdAsync(user);
