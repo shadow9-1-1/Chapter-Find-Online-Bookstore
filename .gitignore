@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Chapter Find Online Bookstore/ScaffoldingReadMe.txt
+/Chapter Find Online Bookstore/appsettings.json
