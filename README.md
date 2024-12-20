@@ -21,7 +21,7 @@ Chapter Find allows users to browse a curated selection of books, receive person
 
 To run Chapter Find locally, ensure you have the following installed:
 
-- [.NET Core](https://dotnet.microsoft.com/download) (Version 6.0+)
+- [.NET Core](https://dotnet.microsoft.com/download) (Version 8.0+)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 - [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
 - [Git](https://git-scm.com/)
