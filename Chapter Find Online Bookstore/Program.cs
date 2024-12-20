@@ -17,6 +17,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+/////////////
+///////// Add this line //////////////////////
+///
+var services = builder.Services;
+var configuration = builder.Configuration;
+
+services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = "665100814109-nc29na390mtkj26vgekdgiobph0lhhnh.apps.googleusercontent.com";
+    googleOptions.ClientSecret = "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";
+});
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
