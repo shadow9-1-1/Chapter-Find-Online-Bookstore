@@ -2,6 +2,7 @@ using Chapter_Find_Online_Bookstore.Model;
 using Chapter_Find_Online_Bookstore.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using ASPNETCoreIdentityDemo.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Chapter_Find_Online_Bookstore.Pages
 {
-    [Authorize]
+    [Authorize(Roles = "customers")]
     public class userModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
