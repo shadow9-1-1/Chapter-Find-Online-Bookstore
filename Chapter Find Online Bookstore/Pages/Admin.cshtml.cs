@@ -1,10 +1,12 @@
 using Chapter_Find_Online_Bookstore.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
 
 namespace Chapter_Find_Online_Bookstore.Pages
 {
+    [Authorize(Roles = "admin")]
     public class AdminModel : PageModel
     {
         private dbclass t1;
@@ -14,6 +16,7 @@ namespace Chapter_Find_Online_Bookstore.Pages
 
         public DataTable Table3 { get; set; }
         public DataTable Table4 { get; set; }
+        public int books { get; set; }
 
         private readonly ILogger<AdminModel> _logger;
 
@@ -25,7 +28,8 @@ namespace Chapter_Find_Online_Bookstore.Pages
         public void OnGet()
         {
             Table = t1.GetNewOrders();
-            Table1 = t1.ShowTable("Customers");
+            Table1 = t1.GetAllCustomers();
+            books=t1.GetBooks().Rows.Count;
             Table2 = t1.ShowTable("Books");
             Table3 = t1.ShowTable("Orders");
             Table4 = t1.ShowTable("Categories");

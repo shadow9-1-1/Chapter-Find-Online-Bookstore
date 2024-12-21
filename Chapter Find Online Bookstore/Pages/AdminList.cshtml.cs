@@ -1,10 +1,12 @@
 using Chapter_Find_Online_Bookstore.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
 
 namespace Chapter_Find_Online_Bookstore.Pages
 {
+    [Authorize(Roles = "admin")]
     public class AdminListModel : PageModel
     {
         private dbclass t1;

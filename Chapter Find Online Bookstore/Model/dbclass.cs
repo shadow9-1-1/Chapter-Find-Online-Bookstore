@@ -41,7 +41,7 @@ namespace Chapter_Find_Online_Bookstore.Model
         {
 
 
-            string SQLcon = "Data Source=AHMED;Initial Catalog=ChapterFind;Integrated Security=True;";
+            string SQLcon = "Data Source=AHMED;Initial Catalog=ChapterFindV2;Integrated Security=True;";
 
             con = new SqlConnection(SQLcon);
         }
@@ -777,78 +777,92 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
 
             return dt;
-        }
+        }  ///Done
         public DataTable GetNewOrdersWithDetails()
         {
             DataTable dt = new DataTable();
             string query = @"
-            SELECT 
-                O.OrderID,
-                C.Name AS CustomerName,
-                O.OrderDate,
-                O.TotalAmount,
-                O.Status,
-                O.ShippingAddress,
-                O.PhoneNumber,
-                COUNT(OD.BookID) AS TotalBooksOrdered
-            FROM 
-                Orders O
-            INNER JOIN 
-                Customers C ON O.CustomerID = C.CustomerID
-            INNER JOIN 
-                OrderDetails OD ON O.OrderID = OD.OrderID
-            WHERE 
-                O.Status = @Status
-            GROUP BY 
-                O.OrderID, C.Name, O.OrderDate, O.TotalAmount, O.Status, O.ShippingAddress, O.PhoneNumber";
+    SELECT 
+        O.OrderID,
+        U.FirstName + ' ' + U.LastName AS CustomerName,
+        O.OrderDate,
+        O.TotalAmount,
+        O.Status,
+        O.ShippingAddress,
+        O.PhoneNumber,
+        COUNT(OD.BookID) AS TotalBooksOrdered
+    FROM 
+        Orders O
+    INNER JOIN 
+        AspNetUsers U ON O.CustomerID = U.Id
+    INNER JOIN 
+        OrderDetails OD ON O.OrderID = OD.OrderID
+    WHERE 
+        O.Status = @Status
+    GROUP BY 
+        O.OrderID, 
+        U.FirstName, 
+        U.LastName, 
+        O.OrderDate, 
+        O.TotalAmount, 
+        O.Status, 
+        O.ShippingAddress, 
+        O.PhoneNumber";
 
             try
             {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlConnection con = new SqlConnection("YourConnectionStringHere"))
                 {
-                    cmd.Parameters.AddWithValue("@Status", "waiting to confirm");
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        dt.Load(reader);
+                        cmd.Parameters.AddWithValue("@Status", "waiting to confirm");
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                        }
                     }
                 }
             }
             catch (SqlException ex)
             {
-                
+                // Consider logging the exception instead of writing to console
                 Console.WriteLine("An error occurred: " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
             }
 
             return dt;
-        }
+        }  ///Done
+
         public DataTable GetAllOrdersWithDetails()
         {
             DataTable dt = new DataTable();
             string query = @"
-            SELECT 
-                O.OrderID,
-                C.Name AS CustomerName,
-                O.OrderDate,
-                O.TotalAmount,
-                O.Status,
-                O.ShippingAddress,
-                O.PhoneNumber,
-                COUNT(OD.BookID) AS TotalBooksOrdered
-            FROM 
-                Orders O
-            INNER JOIN 
-                Customers C ON O.CustomerID = C.CustomerID
-            INNER JOIN 
-                OrderDetails OD ON O.OrderID = OD.OrderID
-            GROUP BY 
-                O.OrderID, C.Name, O.OrderDate, O.TotalAmount, O.Status, O.ShippingAddress, O.PhoneNumber
-            ORDER BY 
-                O.OrderDate DESC"; 
+    SELECT 
+        O.OrderID,
+        U.FirstName + ' ' + U.LastName AS CustomerName,
+        O.OrderDate,
+        O.TotalAmount,
+        O.Status,
+        O.ShippingAddress,
+        O.PhoneNumber,
+        COUNT(OD.BookID) AS TotalBooksOrdered
+    FROM 
+        Orders O
+    INNER JOIN 
+        AspNetUsers U ON O.CustomerID = U.Id
+    INNER JOIN 
+        OrderDetails OD ON O.OrderID = OD.OrderID
+    GROUP BY 
+        O.OrderID, 
+        U.FirstName, 
+        U.LastName, 
+        O.OrderDate, 
+        O.TotalAmount, 
+        O.Status, 
+        O.ShippingAddress, 
+        O.PhoneNumber
+    ORDER BY 
+        O.OrderDate DESC"; 
 
             try
             {
@@ -872,27 +886,33 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
 
             return dt;
-        }
+        } ///Done
         public DataTable GetAllCustomers()
         {
             DataTable dt = new DataTable();
             string query = @"
-            SELECT 
-                C.CustomerID,
-                C.Name AS CustomerName,
-                C.Username,
-                C.Email,
-                C.PhoneNumber,
-                COUNT(O.OrderID) AS TotalOrders,
-                COUNT(DISTINCT A.City) AS AddressCount
-            FROM 
-                Customers C
-            LEFT JOIN 
-                Orders O ON C.CustomerID = O.CustomerID
-            LEFT JOIN 
-                CustomersAddress A ON C.CustomerID = A.CustomerID
-            GROUP BY 
-                C.CustomerID, C.Name, C.Username, C.Email, C.PhoneNumber";
+    SELECT 
+        U.Id AS CustomerID,
+        CONCAT(U.FirstName, ' ', U.LastName) AS CustomerName,
+        U.Email,
+        U.PhoneNumber,
+		U.CreatedAt,
+        COUNT(O.OrderID) AS TotalOrders,
+        COUNT(DISTINCT A.City) AS AddressCount
+    FROM 
+        AspNetUsers U
+    LEFT JOIN 
+        Orders O ON U.Id = O.CustomerID
+    LEFT JOIN 
+        CustomersAddress A ON U.Id = A.CustomerID
+    INNER JOIN 
+        AspNetUserRoles UR ON U.Id = UR.UserId
+    INNER JOIN 
+        AspNetRoles R ON UR.RoleId = R.Id
+    WHERE 
+        R.NormalizedName = 'CUSTOMERS'
+    GROUP BY 
+        U.Id, U.FirstName, U.LastName, U.CreatedAt, U.Email, U.PhoneNumber";
 
             try
             {
@@ -907,7 +927,6 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
             catch (SqlException ex)
             {
-                
                 Console.WriteLine("An error occurred: " + ex.Message);
             }
             finally
@@ -916,19 +935,29 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
 
             return dt;
-        }
+        }  /// Done
+
         public DataTable GetAllAdmins()
         {
             DataTable dt = new DataTable();
             string query = @"
-            SELECT 
-                Username,
-                Name,
-                Email,
-                PhoneNumber,
-                Title
-            FROM 
-                Admin";
+        SELECT 
+            U.Id AS AdminID,
+            CONCAT(U.FirstName, ' ', U.LastName) AS AdminName,
+            U.UserName AS Username,
+            U.Email,
+            U.PhoneNumber,
+            U.CreatedAt
+        FROM 
+            AspNetUsers U
+        INNER JOIN 
+            AspNetUserRoles UR ON U.Id = UR.UserId
+        INNER JOIN 
+            AspNetRoles R ON UR.RoleId = R.Id
+        WHERE 
+            R.NormalizedName = 'ADMIN'
+        GROUP BY 
+            U.Id, U.FirstName, U.LastName, U.UserName, U.Email, U.PhoneNumber, U.CreatedAt";
          
 
             try
@@ -953,7 +982,7 @@ namespace Chapter_Find_Online_Bookstore.Model
             }
 
             return dt;
-        }
+        } /// Done
         public DataTable GetAllCategories()
         {
             DataTable dt = new DataTable();
@@ -1523,7 +1552,165 @@ namespace Chapter_Find_Online_Bookstore.Model
             {
                 con.Close();
             }
+        } /// Done
+
+        ////////////////////////////////////////////////////    Done    ////////////////////////////////////////////////////
+
+        public bool UpdateBook(string bookID, string title, string authorID, string categoryID, decimal price, int isDiscount, decimal discount, int inStock, string sDescription, string description, int releaseDate, int nuOfPage, int collection, string img, int visability)
+        {
+            bool success = false;
+            string query = @"
+    UPDATE Books
+    SET 
+        Title = @Title, 
+        AuthorID = @AuthorID, 
+        CategoryID = @CategoryID, 
+        Price = @Price, 
+        IsDiscount = @IsDiscount, 
+        Discount = @Discount, 
+        InStock = @InStock, 
+        SDescription = @SDescription, 
+        Description = @Description, 
+        ReleaseDate = @ReleaseDate, 
+        NuOfPage = @NuOfPage, 
+        Collection = @Collection, 
+        img = @img, 
+        Visabilty = @Visabilty
+    WHERE 
+        BookID = @BookID";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@BookID", bookID);
+                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                cmd.Parameters.AddWithValue("@Price", price);
+                cmd.Parameters.AddWithValue("@IsDiscount", isDiscount);
+                cmd.Parameters.AddWithValue("@Discount", discount);
+                cmd.Parameters.AddWithValue("@InStock", inStock);
+                cmd.Parameters.AddWithValue("@SDescription", sDescription);
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+                cmd.Parameters.AddWithValue("@NuOfPage", nuOfPage);
+                cmd.Parameters.AddWithValue("@Collection", collection);
+                cmd.Parameters.AddWithValue("@img", img);
+                cmd.Parameters.AddWithValue("@Visabilty", visability);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return success;
         }
+        public bool UpdateCollection(string bookID, string title, string authorID, string categoryID, decimal price, int isDiscount, decimal discount, int inStock, string sDescription, string description, int releaseDate, int nuOfPage, int collection, string img, int visability)
+        {
+            bool success = false;
+            string query = @"
+    UPDATE Books
+    SET 
+        Title = @Title, 
+        AuthorID = @AuthorID, 
+        CategoryID = @CategoryID, 
+        Price = @Price, 
+        IsDiscount = @IsDiscount, 
+        Discount = @Discount, 
+        InStock = @InStock, 
+        SDescription = @SDescription, 
+        Description = @Description, 
+        ReleaseDate = @ReleaseDate, 
+        NuOfPage = @NuOfPage, 
+        Collection = @Collection, 
+        img = @img, 
+        Visabilty = @Visabilty
+    WHERE 
+        BookID = @BookID";
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@BookID", bookID);
+                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@AuthorID", authorID);
+                cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                cmd.Parameters.AddWithValue("@Price", price);
+                cmd.Parameters.AddWithValue("@IsDiscount", isDiscount);
+                cmd.Parameters.AddWithValue("@Discount", discount);
+                cmd.Parameters.AddWithValue("@InStock", inStock);
+                cmd.Parameters.AddWithValue("@SDescription", sDescription);
+                cmd.Parameters.AddWithValue("@Description", description);
+                cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+                cmd.Parameters.AddWithValue("@NuOfPage", nuOfPage);
+                cmd.Parameters.AddWithValue("@Collection", collection);
+                cmd.Parameters.AddWithValue("@img", img);
+                cmd.Parameters.AddWithValue("@Visabilty", visability);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return success;
+        }
+        public bool UpdateCategory(string categoryID, string categoryName, string img)
+        {
+            bool success = false;
+            string query = @"
+    UPDATE Categories
+    SET 
+        CategoryName = @CategoryName, 
+        img = @img
+    WHERE 
+        CategoryID = @Category";
+            try
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@CategoryID", categoryID);
+                    cmd.Parameters.AddWithValue("@CategoryName", categoryName);
+                    cmd.Parameters.AddWithValue("@img", img);
+    
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        success = true;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    
+                }
+                finally
+                {
+                    con.Close();
+                }
+    
+                return success;
+            }
 
 
     }

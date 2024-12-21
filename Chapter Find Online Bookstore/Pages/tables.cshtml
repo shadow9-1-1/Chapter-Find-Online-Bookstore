@@ -30,11 +30,10 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>CustomerID</th>
                                 <th>Customer Name</th>
-                                <th>Username</th>
                                 <th>Email</th>
                                 <th>PhoneNumber</th>
+                                <th>Date Join</th>
                                 <th>Total Orders</th>
                                 <th>Address Count</th>
                             </tr>
@@ -43,7 +42,6 @@
                             @for (int i = 0; i < Model.Table.Rows.Count; i++)
                             {
                                 <tr>
-                                    <td>@Model.Table.Rows[i][0]</td>
                                     <td>@Model.Table.Rows[i][1]</td>
                                     <td>@Model.Table.Rows[i][2]</td>
                                     <td>@Model.Table.Rows[i][3]</td>
@@ -58,11 +56,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>CustomerID</th>
                                 <th>Customer Name</th>
-                                <th>Username</th>
                                 <th>Email</th>
                                 <th>PhoneNumber</th>
+                                <th>Date Join</th>
                                 <th>Total Orders</th>
                                 <th>Address Count</th>
                             </tr>
@@ -87,11 +84,9 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Username</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>PhoneNumber</th>
-                                <th>Title</th>
 
                             </tr>
                         </thead>
@@ -99,10 +94,8 @@
                             @for (int i = 0; i < Model.Table1.Rows.Count; i++)
                             {
                                 <tr>
-                                    <td>@Model.Table1.Rows[i][0]</td>
                                     <td>@Model.Table1.Rows[i][1]</td>
                                     <td>@Model.Table1.Rows[i][2]</td>
-                                    <td>@Model.Table1.Rows[i][3]</td>
                                     <td>@Model.Table1.Rows[i][4]</td>
 
 
@@ -113,11 +106,11 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Username</th>
+                                
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>PhoneNumber</th>
-                                <th>Title</th>
+                                
                             </tr>
                         </tfoot>
                     </table>
